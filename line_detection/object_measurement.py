@@ -4,7 +4,7 @@ import numpy as np
 import utlis
 
 webcam = False
-path = 'pic1.jpg'
+path = 'front2.jpg'
 pathvid = "ball_vid_4.mp4"
 cap = cv2.VideoCapture(0)
 cap.set(10,160)
