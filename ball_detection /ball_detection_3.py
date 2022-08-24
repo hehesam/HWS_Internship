@@ -27,7 +27,7 @@ def getAngle(all_centers,frame):
 
 greenLower = (29, 86, 6)
 greenUpper = (64, 255, 255)
-vs = cv2.VideoCapture("ball_vid_2.mp4")
+vs = cv2.VideoCapture("ball_vid_4.mp4")
 
 time.sleep(2.0)
 all_centers = []
