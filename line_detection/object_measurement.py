@@ -3,8 +3,8 @@ import cv2
 import numpy as np
 import utlis
 
-webcam = True
-path = '1.jpg'
+webcam = False
+path = 'pic1.jpg'
 pathvid = "ball_vid_4.mp4"
 cap = cv2.VideoCapture(0)
 cap.set(10,160)
