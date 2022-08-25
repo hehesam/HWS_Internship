@@ -6,6 +6,7 @@ cap = cv2.VideoCapture(0)
 
 while 1 :
     _, img = cap.read()
+    img = cv2.imread("front22.jpg")
     imgray = cv2.cvtColor(img, cv2.COLOR_RGB2GRAY)
     ret, thresh = cv2.threshold(imgray, 127, 255, 0)
     contours , hierarchy = cv2.findContours(thresh, cv2.RETR_TREE, cv2.CHAIN_APPROX_NONE)

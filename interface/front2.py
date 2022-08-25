@@ -55,11 +55,11 @@ while not done :
 
             print("Click", pos, "Grid coordinates : ", row, column)
 
-    screen.fill(BLACK)
+    screen.fill(WHITE)
 
     for row in range(MAT_SIZE):
         for column in range(MAT_SIZE):
-            color = WHITE
+            color = BLACK
             if grid[row][column] == 1 :
                 color = RED
             pygame.draw.rect(screen,

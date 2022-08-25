@@ -4,6 +4,7 @@ import numpy as np
 cap = cv2.VideoCapture(0)
 while True :
     _, img = cap.read()
+    img = cv2.imread("front2.jpg")
     gray = cv2.cvtColor(img, cv2.COLOR_BGR2GRAY)
 
     canimg = cv2.Canny(gray, 50,200)
