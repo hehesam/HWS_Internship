@@ -2,6 +2,7 @@ import cv2
 import imutils
 import time
 import math
+import multiple_frames
 
 def gradient(pt1, pt2):
     if pt2[0]-pt1[0] == 0 :
@@ -51,17 +52,19 @@ while True:
     hsv = cv2.cvtColor(blurred, cv2.COLOR_BGR2HSV)
     # cv2.imshow("hsv", hsv)
 
-    mask = cv2.inRange(hsv, greenLower, greenUpper)
+    mask1 = cv2.inRange(hsv, greenLower, greenUpper)
     # cv2.imshow('binary', mask)
 
-    mask = cv2.erode(mask, None, iterations=2)
+    mask2 = cv2.erode(mask1, None, iterations=2)
     # cv2.imshow('mask2', mask)
 
-    mask = cv2.dilate(mask, None, iterations=2)
-    cv2.imshow('mask3', mask)
+    mask3 = cv2.dilate(mask2, None, iterations=2)
+    # cv2.imshow('mask3', mask)
 
+    imgStack = multiple_frames.stackImages(0.8, ([frame,blurred, hsv], [mask1, mask2, mask3]))
+    cv2.imshow("all masks", imgStack)
     #  finding contours is like finding white object from black background.
-    cnts = cv2.findContours(mask.copy(), cv2.RETR_EXTERNAL,
+    cnts = cv2.findContours(mask3.copy(), cv2.RETR_EXTERNAL,
                             cv2.CHAIN_APPROX_SIMPLE)
     cnts = imutils.grab_contours(cnts) # returns center
     center = None
