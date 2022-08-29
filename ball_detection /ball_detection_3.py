@@ -25,14 +25,16 @@ def getAngle(all_centers,frame):
 
     # return abs(angD)
 
+greenLower = (143, 144,140)
+greenUpper = (180, 255, 255)
 
-greenLower = (29, 86, 6)
-greenUpper = (64, 255, 255)
-vs = cv2.VideoCapture("ball_vid_4.mp4")
-
+greenLower = (23, 62, 90)
+greenUpper = (114, 193, 255)
+vs = cv2.VideoCapture(2)
 time.sleep(2.0)
 all_centers = []
 i = 0
+
 ball_detected = False
 
 
@@ -55,14 +57,20 @@ while True:
     mask1 = cv2.inRange(hsv, greenLower, greenUpper)
     # cv2.imshow('binary', mask)
 
-    mask2 = cv2.erode(mask1, None, iterations=2)
+    mask2 = cv2.erode(mask1, None, iterations=4)
     # cv2.imshow('mask2', mask)
 
-    mask3 = cv2.dilate(mask2, None, iterations=2)
+    mask3 = cv2.dilate(mask2, None, iterations=6)
     # cv2.imshow('mask3', mask)
 
-    imgStack = multiple_frames.stackImages(0.8, ([frame,blurred, hsv], [mask1, mask2, mask3]))
-    cv2.imshow("all masks", imgStack)
+    # imgStack = multiple_frames.stackImages(0.8, ([frame,blurred, hsv], [mask1, mask2, mask3]))
+    # imgStack = multiple_frames.stackImages(0.8, ([hsv,mask1], [ mask2, mask3]))
+
+
+    # am_w , am_h = imgStack.shape[:2]
+    # imgStack = cv2.resize(imgStack, (int(am_w), int(am_h/2)))
+
+    # cv2.imshow("all masks", imgStack)
     #  finding contours is like finding white object from black background.
     cnts = cv2.findContours(mask3.copy(), cv2.RETR_EXTERNAL,
                             cv2.CHAIN_APPROX_SIMPLE)
@@ -80,7 +88,8 @@ while True:
         # print("center",center)
 
         # To see the centroid clearly
-        if radius > 1:
+        print("R : ",radius)
+        if radius > 1 and radius < 500:
             cv2.circle(frame, (int(x), int(y)), int(radius), (0, 255, 255), 5)
             cv2.imwrite("circled_frame.png", cv2.resize(frame, (int(height / 2), int(width / 2))))
             all_centers.append(center)
@@ -94,9 +103,9 @@ while True:
     elif ball_detected == True :
         ball_detected = False
         all_centers.clear()
-
-    cv2.imshow("Frame", frame)
-    if cv2.waitKey(0) & 0xFF == ord('q'):
+    imgStack = multiple_frames.stackImages(0.8, ([frame, mask1], [mask2, mask3]))
+    cv2.imshow("Frame", imgStack)
+    if cv2.waitKey(1) & 0xFF == ord('q'):
         break
 
 

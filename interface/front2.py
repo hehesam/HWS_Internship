@@ -13,6 +13,7 @@ MARGIN = WIDTH//4
 MAT_SIZE = 5
 
 size = (MAT_SIZE*WIDTH + (MAT_SIZE+1) * MARGIN, MAT_SIZE*HEIGHT + (MAT_SIZE+1) * MARGIN)
+print("size is : ", size)
 
 # Create a 2 dimensional array. A two dimensional
 # array is simply a list of lists.

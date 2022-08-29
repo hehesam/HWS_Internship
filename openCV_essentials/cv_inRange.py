@@ -71,7 +71,7 @@ def on_high_V_thresh_trackbar(val):
 parser = argparse.ArgumentParser(description='Code for Thresholding Operations using inRange tutorial.')
 parser.add_argument('--camera', help='Camera divide number.', default=0, type=int)
 args = parser.parse_args()
-cap = cv.VideoCapture(args.camera)
+cap = cv.VideoCapture(2)
 cv.namedWindow(window_capture_name)
 cv.namedWindow(window_detection_name)
 cv.createTrackbar(low_H_name, window_detection_name, low_H, max_value_H, on_low_H_thresh_trackbar)
@@ -87,7 +87,7 @@ while True:
         break
     frame_HSV = cv.cvtColor(frame, cv.COLOR_BGR2HSV)
     frame_threshold = cv.inRange(frame_HSV, (low_H, low_S, low_V), (high_H, high_S, high_V))
-    cv.imshow("HSV", frame_HSV)
+    # cv.imshow("HSV", frame_HSV)
     cv.imshow(window_capture_name, frame)
     cv.imshow(window_detection_name, frame_threshold)
 

@@ -82,6 +82,8 @@ while True :
     imgDill = cv2.dilate(imgCanny, kernel, iterations=1)
     getContours(imgDill, imgContour=imgContour)
     imgStack = stackImages(0.8, ([img,imgGray, imgCanny], [imgDill, imgContour, imgHsv]))
+    am_w , am_h = imgStack.shape[:2]
+    imgStack = cv2.resize(imgStack, (int(am_w), int(am_h/2)))
 
     cv2.imshow("result", imgStack)
     if cv2.waitKey(1) & 0xff == ord('q'):
