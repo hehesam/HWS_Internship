@@ -93,8 +93,8 @@ while True:
             cv2.circle(frame, (int(x), int(y)), int(radius), (0, 255, 255), 5)
             cv2.imwrite("circled_frame.png", cv2.resize(frame, (int(height / 2), int(width / 2))))
             all_centers.append(center)
-            for ii in all_centers:
-                cv2.circle(frame, ii, 5, (0, 0, 255), -1)
+            # for ii in all_centers:
+            #     cv2.circle(frame, ii, 5, (0, 0, 255), -1)
             if len(all_centers) >= 3:
                 getAngle(all_centers, frame)
 
@@ -105,6 +105,7 @@ while True:
         all_centers.clear()
     imgStack = multiple_frames.stackImages(0.8, ([frame, mask1], [mask2, mask3]))
     cv2.imshow("Frame", imgStack)
+    cv2.imwrite("vir.jpg", imgStack)
     if cv2.waitKey(1) & 0xFF == ord('q'):
         break
 

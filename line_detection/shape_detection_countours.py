@@ -4,7 +4,7 @@ import numpy as np
 framewdith = 640
 frameheight = 480
 
-cap = cv2.VideoCapture(0)
+cap = cv2.VideoCapture(2)
 cap.set(3,framewdith)
 cap.set(4, frameheight)
 
@@ -69,7 +69,7 @@ def getContours(img,imgContour):
 
 while True :
     success, img = cap.read()
-    img = cv2.imread("front22.jpg")
+    # img = cv2.imread("front22.jpg")
     imgContour = img.copy()
     imgBlur = cv2.GaussianBlur(img, (7,7), 1)
     imgGray = cv2.cvtColor(imgBlur, cv2.COLOR_BGR2GRAY)
