@@ -38,58 +38,52 @@ cv2.createTrackbar("Threshold1", "Parameters", 0, 255, empty)
 cv2.createTrackbar("Threshold2", "Parameters", 0, 255, empty)
 
 
-cap = cv2.VideoCapture(2)
-while True :
-    success, img = cap.read()
-    print(img.shape)
-    cv2.imshow("frame", img)
-    cv2.imwrite("1.jpg",img)
-    imgBlur = cv2.GaussianBlur(img, (7,7), 1)
-    cv2.imwrite("2.jpg",imgBlur)
-    imgGray = cv2.cvtColor(imgBlur, cv2.COLOR_BGR2GRAY)
-    cv2.imwrite("3.jpg",imgGray)
-
-    threshold1 = cv2.getTrackbarPos("Threshold1", "Parameters")
-    threshold2 = cv2.getTrackbarPos("Threshold2", "Parameters")
-    imgCanny = cv2.Canny(imgGray, threshold1, threshold2)
-    cv2.imwrite("4.jpg", imgCanny)
-    imgStack = stackImages(0.8, ([img,imgBlur], [imgGray,imgCanny]))
-    cv2.imwrite("5.jpg", imgStack)
-
-
-    cv2.imshow("res", imgStack)
-
-
-    if cv2.waitKey(1) & 0xff == ord('q'):
-        break
-
-# img = cv2.imread("shrek.jpg")
-# width, height = img.shape[:2]
-# img = cv2.resize(img, (int(height / 2), int(width / 2)))
-# cv2.imshow("shrek", img)
-# cv2.imwrite("res.jpg", img)
+# cap = cv2.VideoCapture(2)
+# while True :
+#     success, img = cap.read()
+#     print(img.shape)
+#     cv2.imshow("frame", img)
+#     cv2.imwrite("1.jpg",img)
+#     imgBlur = cv2.GaussianBlur(img, (7,7), 1)
+#     cv2.imwrite("2.jpg",imgBlur)
+#     imgGray = cv2.cvtColor(imgBlur, cv2.COLOR_BGR2GRAY)
+#     cv2.imwrite("3.jpg",imgGray)
 #
-# imgGray = cv2.cvtColor(img, cv2.COLOR_BGR2GRAY)
-# cv2.imshow('grayshrek',imgGray )
-# cv2.imwrite("grayres.jpg", imgGray)
+#     threshold1 = cv2.getTrackbarPos("Threshold1", "Parameters")
+#     threshold2 = cv2.getTrackbarPos("Threshold2", "Parameters")
+#     imgCanny = cv2.Canny(imgGray, threshold1, threshold2)
+#     cv2.imwrite("4.jpg", imgCanny)
+#     imgStack = stackImages(0.8, ([img,imgBlur], [imgGray,imgCanny]))
+#     cv2.imwrite("5.jpg", imgStack)
 #
-# imgBlur = cv2.GaussianBlur(imgGray, (17,17), 0)
-# cv2.imshow('blurres',imgBlur )
-# cv2.imwrite("blurres.jpg", imgBlur)
 #
-# # threshold1 = cv2.getTrackbarPos("Threshold1", "Parameters")
-# # threshold2 = cv2.getTrackbarPos("Threshold2", "Parameters")
+#     cv2.imshow("res", imgStack)
 #
-# imgCanny = cv2.Canny(img, 70, 150)
-# cv2.imshow("canny", imgCanny)
-# cv2.imwrite("cannyres.jpg", imgCanny)
 #
-# kernel = np.ones((5,5), np.uint8)
-# imgDialation = cv2.dilate(imgCanny, kernel, iterations=1)
-# cv2.imshow("dialation", imgDialation)
-# cv2.imwrite("dialres.jpg", imgDialation)
-#
-# imgErode = cv2.erode(imgDialation, kernel, iterations=1)
-# cv2.imshow("er", imgErode)
-# cv2.imwrite("eroderes.jpg", imgErode)
-# cv2.waitKey(0)
+#     if cv2.waitKey(1) & 0xff == ord('q'):
+#         break
+
+# image cropping
+
+
+img = cv2.imread("image.jpg")
+
+black = np.zeros((512, 512,3), np.uint8)
+black[:] = 0,0,0
+# cv2.line(black, (0,0), (512,512), (255,0,0), 3)
+# cv2.rectangle(black, (200, 200), (300, 450), (125,125,0), cv2.FILLED)
+# cv2.rectangle(black, (100,100), (200,250), (0,0,200), cv2.FILLED)
+# cv2.circle(black, (270,250), 25, (100,15, 200), 3)
+# cv2.circle(black, (250,0), 25, (100,15, 200), cv2.FILLED)
+cv2.putText(black, "Shrek is love", (200, 250),cv2.FONT_HERSHEY_SIMPLEX, 1, (0,255,0), 4)
+
+cv2.imshow("black",  black)
+# print(black)
+
+cv2.imwrite("black.jpg", black)
+
+white = np.ones((512,512,3), np.uint8)
+cv2.imshow("white", white)
+print(white)
+cv2.imwrite("white.jpg", white)
+cv2.waitKey(0)
