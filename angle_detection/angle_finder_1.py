@@ -6,6 +6,8 @@ pointList = []
 
 img = cv2.imread('angle_sample2.png')
 img = cv2.resize(img, None, fx=1, fy=1)
+
+
 def mousePoints(event, x,y, flags, params):
     if event == cv2.EVENT_LBUTTONDOWN:
         size = len(pointList)
@@ -27,8 +29,9 @@ def getAngle():
     angR = math.atan((m2-m1)/(1+(m2*m1)))
     angD = -round(math.degrees(angR))
     # print(angD)
-
     cv2.putText(img,str(angD), (pt1[0]-40, pt1[1]-20), cv2.FONT_HERSHEY_PLAIN, 1.5, (0,0,255, 2))
+
+
 while True :
 
     if len(pointList) % 3 == 0 and len(pointList) != 0 :
