@@ -1,22 +1,29 @@
 import pygame
 import redis
 
+r = redis.Redis(host='localhost', port=6379)
+
+
 BLACK = (0,0,0)
 WHITE = (255,255,255)
 GREEN = (0,255,0)
 RED = (255,0,0)
 
-WIDTH = 100
-HEIGHT = 100
+print(int(r.get("W")), int(r.get("H")))
+t_width = int(r.get("W"))
+t_height = int(r.get("H"))
+size = (t_width, t_height)
+
+WIDTH = t_width//5
+HEIGHT = t_height//5
 
 MARGIN = WIDTH//4
 
-MAT_SIZE = 5
+MAT_SIZE = 1
 
-size = (MAT_SIZE*WIDTH + (MAT_SIZE+1) * MARGIN, MAT_SIZE*HEIGHT + (MAT_SIZE+1) * MARGIN)
+# size = (MAT_SIZE*WIDTH + (MAT_SIZE+1) * MARGIN, MAT_SIZE*HEIGHT + (MAT_SIZE+1) * MARGIN)
 print("size is : ", size)
 
-redis.Redis(host='localhost', port=6379)
 
 # Create a 2 dimensional array. A two dimensional
 # array is simply a list of lists.
